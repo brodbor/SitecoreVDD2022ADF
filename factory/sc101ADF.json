@@ -1,0 +1,9 @@
+{
+	"name": "sc101ADF",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1ecb04b9-a51f-4197-926f-48517325e29f",
+		"tenantId": "084161c4-cac9-4a23-8341-300db66a378d"
+	}
+}

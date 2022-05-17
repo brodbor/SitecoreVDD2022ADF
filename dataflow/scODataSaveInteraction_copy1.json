@@ -1,0 +1,58 @@
+{
+	"name": "scODataSaveInteraction_copy1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "GetJsonInteractionsFile",
+						"type": "DatasetReference"
+					},
+					"name": "ReadInteractionFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Interaction",
+						"type": "DatasetReference"
+					},
+					"name": "saveInteractionDB"
+				},
+				{
+					"dataset": {
+						"referenceName": "VisitedProductDetailsPageEvent",
+						"type": "DatasetReference"
+					},
+					"name": "saveVisitedProductDetailsPageEventtoDB"
+				},
+				{
+					"dataset": {
+						"referenceName": "PageViewEvent",
+						"type": "DatasetReference"
+					},
+					"name": "savePageViewEventtoDB"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FormatDates2"
+				},
+				{
+					"name": "Flatten2"
+				},
+				{
+					"name": "Flatten1"
+				},
+				{
+					"name": "ConditionalSplit1"
+				},
+				{
+					"name": "FormatDates1"
+				}
+			],
+			"script": "source(output(\n\t\tcontext as string,\n\t\tcount as short,\n\t\tnextLink as string,\n\t\tvalue as (ChannelId as string, ConcurrencyToken as string, Contact as (ConcurrencyToken as string, Id as string, IsKnown as boolean, LastModified as string), DeviceProfile as (id as string), Duration as string, EndDateTime as string, Events as (Cart as (Adjustments as (Amount as double, Description as string)[], BuyerCustomerParty as (Name as string, PartyID as string), CartLines as (Adjustments as string[], ExternalCartLineId as string, Id as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double, SubLines as (Adjustments as string[], Id as string, ParentId as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double)[], Total as (Amount as double, CurrencyCode as string, TaxTotal as (TaxSubtotals as string[])))[], CurrencyCode as string, CustomerId as string, CustomerIdFacet as string, Email as string, EmailFacet as string, ExternalId as string, IsLocked as boolean, Name as string, Parties as (Address1 as string, Address2 as string, City as string, Company as string, Country as string, Email as string, ExternalId as string, Facet as string, FirstName as string, LastName as string, PartyId as string, PhoneNumber as string, State as string, ZipPostalCode as string)[], Payment as string[], Shipping as (ExternalId as string, LineIDs as string[], PartyID as string, ShippingMethodID as string)[], ShopName as string, Total as (Amount as double, CurrencyCode as string, TaxTotal as (Amount as double, TaxSubtotals as (PerUnitAmount as double)[])), UserId as string, UserIdFacet as string), CartLines as (CartLine as (Adjustments as string[], ExternalCartLineId as string, Id as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double, SubLines as (Adjustments as string[], Id as string, ParentId as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double)[], Total as (Amount as double, CurrencyCode as string, TaxTotal as (TaxSubtotals as string[]))), Price as string, ProductId as integer, ProductName as string, Quantity as double)[], CategoryId as string, CategoryName as string, CommerceUser as (Comment as string, Customers as string[], Email as string, ExternalId as string, FirstName as string, LastName as string, Shops as string[], UserName as string), CurrencyCode as string, CustomValues as string[], CustomerId as string, CustomerIdFacet as string, Data as integer, DataKey as string, DefinitionId as string, Duration as string, ExternalId as string, Id as string, ItemId as string, ItemLanguage as string, ItemVersion as boolean, MonetaryValue as double, Order as (AccountingCustomerParty as (Name as string, PartyID as string), Adjustments as (Amount as double, Description as string)[], BuyerCustomerParty as (Name as string, PartyID as string), CartLines as (Adjustments as string[], ExternalCartLineId as string, Id as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double, SubLines as (Adjustments as string[], Id as string, ParentId as string, Product as (Adjustments as string[], Options as string[], Price as (Amount as double, Conditions as string[], CurrencyCode as string), ProductId as integer, ProductName as string, SitecoreProductItemId as string), Quantity as double)[], Total as (Amount as double, CurrencyCode as string, TaxTotal as (TaxSubtotals as string[])))[], CurrencyCode as string, CustomerId as string, CustomerIdFacet as string, Email as string, EmailFacet as string, ExternalId as string, IsOfflineOrder as boolean, Name as string, OrderDate as string, OrderID as string, Parties as (Address1 as string, Address2 as string, City as string, Company as string, Country as string, Email as string, ExternalId as string, Facet as string, FirstName as string, LastName as string, PartyId as string, PhoneNumber as string, State as string, ZipPostalCode as string)[], Payment as (ExternalId as string, LineIDs as string[], PartyID as string, PaymentMethodID as string)[], Shipping as (ExternalId as string, LineIDs as string[], PartyID as string, ShippingMethodID as string)[], ShopName as string, Status as string, Total as (Amount as double, CurrencyCode as string, TaxTotal as (Amount as double, TaxSubtotals as (PerUnitAmount as double)[])), TrackingNumber as string, UserId as string, UserIdFacet as string), OrderId as string, ParentCategoryId as string, ParentCategoryName as string, ParentEventId as string, ProductId as integer, ProductName as string, ShopName as string, SitecoreCustomerName as string, SitecoreRenderingDevice as (Id as string, Name as string), SitecoreUserName as string, Text as string, Timestamp as string, Total as (Amount as double, CurrencyCode as string, TaxTotal as (Amount as double, TaxSubtotals as (PerUnitAmount as double)[])), TotalAmount as double, Url as string, UserName as string, type as string)[], Id as string, Initiator as string, LastModified as string, StartDateTime as string, UserAgent as string)[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'singleDocument') ~> ReadInteractionFile\nFlatten2 derive(EndDateTime = toTimestamp(left(EndDateTime, 23), 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSS'),\n\t\tLastModified = toTimestamp(left(LastModified, 23), 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSS'),\n\t\tStartDateTime = toTimestamp(left(StartDateTime, 23), 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSS'),\n\t\tDuration = concat( case(regexExtract(regexReplace(Duration, 'PT', ''), '(\\\\d+)M', 1)!='',regexExtract(regexReplace(Duration, 'PT', ''), '(\\\\d+)M', 1) , '0' ), '.',  regexExtract(regexReplace(Duration, 'PT', ''), '(\\\\d+).(\\\\d+)S', 1))) ~> FormatDates2\nReadInteractionFile foldDown(unroll(value),\n\tmapColumn(\n\t\tId = value.Id,\n\t\tStartDateTime = value.StartDateTime,\n\t\tLastModified = value.LastModified,\n\t\tUserAgent = value.UserAgent,\n\t\tDuration = value.Duration,\n\t\tEndDateTime = value.EndDateTime,\n\t\tContact_Id = value.Contact.Id\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2\nReadInteractionFile foldDown(unroll(value.Events),\n\tmapColumn(\n\t\tInteraction_Id = value.Id,\n\t\tTimestamp = value.Events.Timestamp,\n\t\tItemId = value.Events.ItemId,\n\t\tItemLanguage = value.Events.ItemLanguage,\n\t\tDuration = value.Events.Duration,\n\t\tUrl = value.Events.Url,\n\t\ttype = value.Events.type,\n\t\tId = value.Events.Id,\n\t\tProductName = value.Events.ProductName,\n\t\tProductId = value.Events.ProductId,\n\t\tParentCategoryName = value.Events.ParentCategoryName\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFormatDates1 split(type ==\"#Sitecore.Commerce.CustomModels.PageEvents.VisitedProductDetailsPageEvent\",\n\ttype ==\"#Sitecore.XConnect.Collection.Model.PageViewEvent\",\n\tdisjoint: true) ~> ConditionalSplit1@(VisitedProductDetailsPageEvent, PageViewEvent, Exit)\nFlatten1 derive(Timestamp = toTimestamp(left(Timestamp, 23), 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSS')) ~> FormatDates1\nFormatDates2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tId as string,\n\t\tStartDateTime as timestamp,\n\t\tEndDateTime as timestamp,\n\t\tDuration as string,\n\t\tUserAgent as string,\n\t\tLastModified as timestamp,\n\t\tContact_Id as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tId,\n\t\tStartDateTime,\n\t\tEndDateTime,\n\t\tDuration,\n\t\tUserAgent,\n\t\tLastModified,\n\t\tContact_Id\n\t),\n\tpartitionBy('hash', 1)) ~> saveInteractionDB\nConditionalSplit1@VisitedProductDetailsPageEvent sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tId as string,\n\t\tInteraction_Id as string,\n\t\tTimestamp as timestamp,\n\t\tItemId as string,\n\t\tItemLanguage as string,\n\t\tUrl as string,\n\t\tType as string,\n\t\tProductName as string,\n\t\tProductId as string,\n\t\tParentCategoryName as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tId,\n\t\tInteraction_Id,\n\t\tTimestamp,\n\t\tItemId,\n\t\tItemLanguage,\n\t\tType = type,\n\t\tProductName,\n\t\tProductId,\n\t\tParentCategoryName\n\t),\n\tpartitionBy('hash', 1)) ~> saveVisitedProductDetailsPageEventtoDB\nConditionalSplit1@PageViewEvent sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tId as string,\n\t\tInteraction_Id as string,\n\t\tTimestamp as timestamp,\n\t\tItemId as string,\n\t\tItemLanguage as string,\n\t\tUrl as string,\n\t\tType as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tId,\n\t\tInteraction_Id,\n\t\tTimestamp,\n\t\tItemId,\n\t\tItemLanguage,\n\t\tUrl,\n\t\tType = type\n\t)) ~> savePageViewEventtoDB"
+		}
+	}
+}
